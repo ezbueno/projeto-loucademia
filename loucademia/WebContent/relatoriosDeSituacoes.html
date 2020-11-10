@@ -21,7 +21,7 @@
 		</header>
 		<!-- Cabeçalho - Fim -->
 		
-		<h1>Pesquisa de aluno</h1>
+		<h1>Relatório de Situações</h1>
 	
 		<div id="infoMessage">
 			(Aqui vai uma eventual mensagem do sistema, confirmando sucesso ou erro)
@@ -32,74 +32,68 @@
 		<form>
 			<fieldset>
 				<legend>Parâmetros da Pesquisa</legend>
-				<label for="id">ID:</label><br/>
-				<input type="text" name="id" id="id"/><br/>
-				<label for="nome">Nome:</label><br/>
-				<input type="text" name="nome" id="nome"/><br/>
-				<label for="rg">RG:</label><br/>
-				<input type="text" name="rg" id="rg"/><br/>
-				<label for="telefoneDDD">Telefone:</label><br/>
-				<input type="tel" name="telefoneDDD" id="telefoneDDD"/>
-				<input type="tel" name="telefoneNumero" id="telefoneNumero"/>					
+				<label for="situacao" id="situacao">Situação</label><br/>
+				<select>
+					<option>Ativo</option>
+					<option>Inativo</option>
+					<option>Com pendência</option>
+				</select>				
 			</fieldset>
 			<br/>
-			<input type="submit" value="Pesquisar"/>
+			<input type="submit" value="Gerar relatório"/>
 		</form>
-				
+		
 		<table>
 			<tr>
 				<th>ID</th>
 				<th>Nome</th>
-				<th>RG</th>
-				<th>E-mail</th>
 				<th>Situação</th>
+				<th>Celular</th>
+				<th>Fixo</th>
 				<th>Ações</th>
 			</tr>
 			<tr>
 				<td>1</td>
 				<td>Ezandro</td>
-				<td>111.111.111</td>
-				<td>teste@teste.com</td>
 				<td>Ativo</td>
+				<td>11 99999-1111</td>
+				<td>11 49999-1111</td>
 				<td>
 					<input type="button" value="Editar"/>
-					<input type="button" value="Excluir"/>
 				</td>
 			</tr>
 			<tr>
 				<td>2</td>
-				<td>Bueno</td>
-				<td>222.222.222</td>
-				<td>teste2@teste2.com</td>
+				<td>Nay</td>
 				<td>Ativo</td>
+				<td>11 99999-1111</td>
+				<td>11 49999-1111</td>
 				<td>
 					<input type="button" value="Editar"/>
-					<input type="button" value="Excluir"/>
 				</td>
 			</tr>
-			<tr>
+									<tr>
 				<td>3</td>
-				<td>Nay</td>
-				<td>333.333.333</td>
-				<td>teste3@teste3.com</td>
-				<td>Inativo</td>
+				<td>Emnie</td>
+				<td>Ativo</td>
+				<td>11 99999-1111</td>
+				<td>11 49999-1111</td>
 				<td>
 					<input type="button" value="Editar"/>
-					<input type="button" value="Excluir"/>
 				</td>
 			</tr>
 			<tr>
 				<td>4</td>
-				<td>Emnie</td>
-				<td>444.444.444</td>
-				<td>teste4@teste4.com</td>
-				<td>Com pendência</td>
+				<td>Rominha</td>
+				<td>Ativo</td>
+				<td>11 99999-1111</td>
+				<td>11 49999-1111</td>
 				<td>
 					<input type="button" value="Editar"/>
-					<input type="button" value="Excluir"/>
 				</td>
 			</tr>			
 		</table>
+		
 		
 	<!-- Rodapé - Início -->
 	</body>
