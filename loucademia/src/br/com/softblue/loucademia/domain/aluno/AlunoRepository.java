@@ -42,7 +42,7 @@ public class AlunoRepository {
 	}
 	
 	public List<Aluno> listAlunos(String matricula, String nome, Integer rg, Integer telefone) {
-		StringBuilder jpql = new StringBuilder("SELECT a FROM Aluno WHERE ");
+		StringBuilder jpql = new StringBuilder("SELECT a FROM Aluno a WHERE ");
 		
 		if (!StringUtils.isEmpty(matricula)) {
 			jpql.append("a.matricula = :matricula AND ");
@@ -57,11 +57,10 @@ public class AlunoRepository {
 		}
 		
 		if (telefone != null) {
-			jpql.append("a.telefone.numeroCelular LIKE :celular OR a.telefone.numeroFixo LIKE :fixo AND ");
+			jpql.append("(a.telefone.numeroCelular LIKE :celular OR a.telefone.numeroFixo LIKE :fixo) AND ");
 		}
 		
 		jpql.append("1 = 1");
-		
 		TypedQuery<Aluno> q = em.createQuery(jpql.toString(), Aluno.class);
 		
 		if (!StringUtils.isEmpty(matricula)) {
@@ -77,9 +76,10 @@ public class AlunoRepository {
 		}
 		
 		if (telefone != null) {
-			q.setParameter("celular", "%" + telefone + "%");
-			q.setParameter("fixo", "%" + telefone + "%");
+			q.setParameter("celular", telefone);
+			q.setParameter("fixo", telefone);
 		}
+		
 		return q.getResultList();
 	}
 }

@@ -1,6 +1,9 @@
 package br.com.softblue.loucademia.application.util;
 
+import javax.ejb.ApplicationException;
+
 @SuppressWarnings("serial")
+@ApplicationException
 public class ValidationException extends RuntimeException {
 
 	public ValidationException() {
