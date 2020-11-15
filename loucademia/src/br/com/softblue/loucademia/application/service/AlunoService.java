@@ -2,8 +2,11 @@ package br.com.softblue.loucademia.application.service;
 
 import br.com.softblue.loucademia.application.util.StringUtils;
 import br.com.softblue.loucademia.application.util.Validation;
+import br.com.softblue.loucademia.application.util.ValidationException;
 import br.com.softblue.loucademia.domain.aluno.Aluno;
 import br.com.softblue.loucademia.domain.aluno.AlunoRepository;
+
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,6 +32,10 @@ public class AlunoService {
 		alunoRepository.store(aluno);
 	}
 	
+	public void delete(String matricula) {
+		alunoRepository.delete(matricula);
+	}
+	
 	private void update(Aluno aluno) {
 		Validation.assertNotEmpty(aluno);
 		Validation.assertNotEmpty(aluno.getMatricula());
@@ -37,5 +44,12 @@ public class AlunoService {
 	
 	public Aluno findByMatricula(String matricula) {
 		return alunoRepository.findByMatricula(matricula);
+	}
+	
+	public List<Aluno> listAlunos(String matricula, String nome, Integer rg, Integer telefone) {
+		if (StringUtils.isEmpty(matricula) && StringUtils.isEmpty(nome) && rg == null && telefone == null) {
+			throw new ValidationException("Pelo menos um critério de pesquisa deve ser fornecido!");
+		}
+		return alunoRepository.listAlunos(matricula, nome, rg, telefone);
 	}
 }
