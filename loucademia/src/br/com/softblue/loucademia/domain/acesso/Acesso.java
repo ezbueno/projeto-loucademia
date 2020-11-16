@@ -1,7 +1,7 @@
 package br.com.softblue.loucademia.domain.acesso;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,10 +29,34 @@ public class Acesso implements Serializable {
 	private Aluno aluno;
 	
 	@Column(name = "ENTRADA", nullable = false)
-	private LocalDate entrada;
+	private LocalDateTime entrada;
 	
 	@Column(name = "SAIDA", nullable = true)
-	private LocalDate saida;
+	private LocalDateTime saida;
+	
+	public boolean isEntradaSaidaPreenchidas() {
+		if (entrada != null && saida != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public TipoAcesso registrarAcesso() {
+		LocalDateTime now = LocalDateTime.now();
+		TipoAcesso tipoAcesso;
+		
+		if (entrada == null) {
+			entrada = now;
+			tipoAcesso = TipoAcesso.Entrada;
+		} else if (saida == null) {
+			saida = now;
+			tipoAcesso = TipoAcesso.Saida;
+		} else {
+			tipoAcesso = null;
+		}
+		
+		return tipoAcesso;
+	}
 
 	public Integer getId() {
 		return id;
@@ -50,19 +74,19 @@ public class Acesso implements Serializable {
 		this.aluno = aluno;
 	}
 
-	public LocalDate getEntrada() {
+	public LocalDateTime getEntrada() {
 		return entrada;
 	}
 
-	public void setEntrada(LocalDate entrada) {
+	public void setEntrada(LocalDateTime entrada) {
 		this.entrada = entrada;
 	}
 
-	public LocalDate getSaida() {
+	public LocalDateTime getSaida() {
 		return saida;
 	}
 
-	public void setSaida(LocalDate saida) {
+	public void setSaida(LocalDateTime saida) {
 		this.saida = saida;
 	}
 
