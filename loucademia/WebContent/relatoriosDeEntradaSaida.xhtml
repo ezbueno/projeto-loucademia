@@ -8,11 +8,11 @@
 	lang="pt-br">
 	
 	<ui:composition template="Layout.xhtml">
-		<f:metadata>
-			<f:viewParam name="matricula" value="#{alunoBean.matricula}"></f:viewParam>
-			<f:viewAction action="#{alunoBean.carregar}"></f:viewAction>
-		</f:metadata>
 		<ui:define name="conteudo">
+			<f:metadata>
+				<f:viewParam name="matricula" value="#{relatorioEntradaSaidaBean.matricula}"></f:viewParam>
+				<f:viewAction action="#{relatorioEntradaSaidaBean.carregarAluno}"></f:viewAction>
+			</f:metadata>
 		
 		<h1>Relatório de Entradas e Saídas</h1>
 	
@@ -42,24 +42,36 @@
 				<br/>
 				
 				<input type="submit" value="Gerar relatório" jsf:action="#{relatorioEntradaSaidaBean.gerarRelatorio}"/>
+			
+				<h:panelGroup rendered="#{not empty relatorioEntradaSaidaBean.acessos}">
+					<table>
+						<tr>
+							<th>Matrícula</th>
+							<th>Nome</th>
+							<th>Entrada</th>
+							<th>Saída</th>
+							<th>Duração</th>
+						</tr>
+						<ui:repeat var="a" value="#{relatorioEntradaSaidaBean.acessos}">
+							<tr>
+								<td>#{a.aluno.matricula}</td>
+								<td>#{a.aluno.nome}</td>
+								<td>
+									<h:outputText value="#{a.entrada}">
+										<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
+									</h:outputText>
+								</td>
+								<td>
+									<h:outputText value="#{a.saida}">
+										<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
+									</h:outputText>
+								</td>
+								<td>#{a.calcularDuracao()}</td>
+							</tr>
+						</ui:repeat>
+					</table>
+				</h:panelGroup>
 			</form>
-	
-			<table>
-				<tr>
-					<th>ID</th>
-					<th>Nome</th>
-					<th>Entrada</th>
-					<th>Saída</th>
-					<th>Duração</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>Ezandro</td>
-					<td>05/03/1990 09:15:17</td>
-					<td>05/03/1990 10:17:17</td>
-					<td>01:00:00</td>
-				</tr>
-			</table>		
 		</ui:define>
 	</ui:composition>
 </html>
